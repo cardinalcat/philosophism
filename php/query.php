@@ -1,8 +1,8 @@
 <?php 
 function submit_query($sql) {
     $dbname = "philosophism";
-    $username = "username";
-    $password = "password";
+    $username = "cardinal";
+    $password = "fulguravem12?!";
     $servername = "localhost";
     
     // Create connection
