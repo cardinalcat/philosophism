@@ -1,3 +1,55 @@
+<?php
+session_start();
+include "php/query.php";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	login();
+}else if ($_SERVER["REQUEST_METHOD"] == 'GET' && $_GET["action"] != NULL){
+	$action = $_GET["action"];
+	switch ($action) {
+		case "logout": 
+			logout();
+		break;
+		case "login" && $_SESSION["active"] == TRUE:
+			logout();
+		break;
+	}
+}
+
+function login() {
+    $user = $_POST["user"];
+	$pass = $_POST["pass"];
+	$redirect = $_POST["sendto"];
+    $sql = "SELECT username, password FROM users WHERE username='$user'";
+	$result = submit_query($sql);
+	if($redirect == NULL){
+		$redirect = "loggedin.php";
+	}
+    if ($result->num_rows > 0) {
+       // output data of each row
+        while($row = $result->fetch_assoc()) {
+            if(password_verify($pass, $row["password"])){
+				$_SESSION["active"] = TRUE;
+				$_SESSION["user"] = $user;
+				echo "<script>location.replace('$redirect')</script>";
+            }
+        }
+        die("user not found");
+    } else {
+        die("couldn't read database results");
+    }
+}
+function logout() {
+	session_destroy();
+
+	$redirect = $_GET["sendto"];
+	if($redirect == NULL){
+		$redirect = "index.php";
+	}
+	echo "<script>location.replace('$redirect');</script>";
+	//header("Location: " + $redirect);
+	exit;
+}
+?>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,33 +66,6 @@
 		<script>
 			create_header("header");
 		</script>
-		<div id="mobileheader">
-			<center>
-			<div id="menubutton">
-			<input type="button" id="m_button" value=" ">
-			<form action="php/proccess.php" method="post">	
-						<input type="text" id="mobilesearchfield" placeholder="search" name="term"/>
-						<input type="submit" class="search" value=" ">
-			</form>
-		</div>
-			<div id="mobilemenu">
-				<h3 class="span" id="h-1">Home</h4>
-					<a class="navigation" id="page1" href="/index.html">Home</a>
-					<a class="navigation" id="page1-1" href="structure.php">structure</a>
-				
-				<h3 class="span" id="h-2">Community</h4>
-					<a class="navigation" id="page2" href="/clubs">Clubs</a>
-					<a class="navigation" id="page2-1" href="/union">Unions</a>
-				
-				<h3 class="span" id="h-3">Projects</h4>
-					<a href="/arkproject" class="navigation" id="page3">Ark Project</a>
-				<h3 class="span" id="h-4">Dashboard</h4>
-					<a href="loggedin" class="navigation" id="page4-2">My Account</a>
-					<a href="/login" class="navigation" id="page4">Login</a>
-					<a href="/createaccount" class="navigation" id="page4-1">create account</a>
-			</div>
-		<center>
-</div>
 <div id="content">
 <div id="leftdiv">
 <!--<div id="leftadd">
@@ -58,16 +83,17 @@ this would be an add
 <center>
 <div id="login">
 <h1>login</h1>
-<form action="php/login.php" method="post">
+<form action="<?php echo $_SERVER['REQUEST_URI'];?>" method="post">
 <table class="table">
-<tr><td><input class="input" type="text" placeholder="username" name="username"></td></tr>
+<tr><td><input class="input" type="text" placeholder="username" name="user"></td></tr>
 <tr><td class="td"></td><td></td></tr>
-<tr><td><input class="input" type="password" placeholder="password" name="password"></td></tr>
+<tr><td><input class="input" type="password" placeholder="password" name="pass"></td></tr>
+<input type="hidden" name="sendto" value="<?php echo $_GET["sendto"];?>"/>
 <tr><td></td><td></td></tr>
 <select name="type">
     <option value="normal">admin</option>
     <option value="scavenger">scavengerhunt</option>
-  </select>
+  </select>name
 </table>
 <div id="random">
 <input type="submit" value="login" class="button" id="loginbutton" class="ca">

@@ -173,7 +173,7 @@ $(document).ready(function(){
 }, 10000);
 }*/
 function changeimage(){
-var images = ["spring.jpg", "island.jpg", "fall.jpg", "forest.jpg", "darkforest.jpg", "mountain.jpg", "ocean.png", "castle.jpg", "ruins.jpg", "bamboo.jpeg"];
+var images = ["spring.jpg", "island.jpg", "fall.jpg", "forest.jpg", "darkforest.jpg", "galaxy.jpg", "mountain.jpg", "ocean.png", "castle.jpg", "ruins.jpg", "bamboo.jpeg"];
 	var i = Math.round(Math.random() * 1000) % 10;
 	document.body.style.backgroundImage = "url(images/" + images[i] + ")";
 }

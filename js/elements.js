@@ -31,7 +31,7 @@ var LinkItem = /** @class */ (function () {
 }());
 function create_header(id) {
     var home_links = [
-        new LinkItem("Home", "/index.html"),
+        new LinkItem("Home", "/index.php"),
         new LinkItem("Structure", "/structure"),
         new LinkItem("Goals", "/goal"),
     ];
@@ -47,9 +47,9 @@ function create_header(id) {
     ];
     var pro_item = new MenuItem("Projects", pro_links, 3);
     var dash_links = [
-        new LinkItem("Login", "/login"),
-        new LinkItem("dashboard", "/loggedin"),
-        new LinkItem("create account", "/createaccount"),
+        new LinkItem("Login", "/login.php?sendto=loggedin.php"),
+        new LinkItem("dashboard", "/loggedin.php"),
+        new LinkItem("create account", "/createaccount.php"),
     ];
     var dash_item = new MenuItem("Dashboard", dash_links, 4);
     var header = document.getElementById(id);

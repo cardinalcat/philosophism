@@ -6,50 +6,14 @@
 		<link rel="shortcut icon" href="images/sun.ico" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="js/main.js"></script>
+		<script src="js/elements.js"></script>
 </head>
 <body onload="changeimage()">
 <div id="stuff">
 		<div id="header">
-			<center>
-			<div id="menu">
-				<div class="dropdown" id="dropdown1">
-				<span>Home</span>
-  						<div class="dropdown-content" id="dropdown-content1">
-    					<a href="/index.html" class="item">Home</a>
-    					<a href="/structure" class="item">structure</a>
-    					<a href="/goal" class="item">goal</a>
-  					</div>
-				</div>
-				<div class="dropdown" id="dropdown2">
-				<span>Community</span>
-  						<div class="dropdown-content" id="dropdown-content2">
-    					<a href="/clubs" class="item">clubs</a>
-    					<a href="/unions" class="item">unions</a>
-  					</div>
-				</div>
-				<div class="dropdown" id="dropdown3">
-				<span>Projects</span>
-  						<div class="dropdown-content" id="dropdown-content3">
-    					<a href="/arkproject" class="item">Ark Project</a>
-    					<a href="/education" class="item">Encourageing Education</a>
-  					</div>
-				</div>
-				<div class="dropdown" id="dropdown4">
-				<span>Dashboard</span>
-  						<div class="dropdown-content" id="dropdown-content4">
-    					<a href="/loggedin.php" class="item">My Account</a>
-    					<a href="/login" class="item">Login</a>
-    					<a href="/createaccount" class="item">Create Account</a>
-  					</div>
-				</div>
-				<div class="dropdown">
-    					<form action="/proccess.php" method="post">	
-						<input type="text" id="searchfield" placeholder="search" name="term"/>
-						<input type="submit" class="search" value=" "></form>
-				</div>	
-			</div>
-			</div>
-			</center>
+			<script>
+				create_header("header");
+			</script>
 		</div>
 		<div id="mobileheader">
 			<center>
