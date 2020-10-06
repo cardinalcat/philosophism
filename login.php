@@ -13,6 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			logout();
 		break;
 	}
+}else{
+	$redirect = $_GET["sendto"];
+	if($redirect == NULL){
+		$redirect = "loggedin.php";
+	}
+	if($_SESSION["active"] == TRUE){
+		echo "<script>location.replace('$redirect')</script>";
+	}
 }
 
 function login() {
@@ -46,7 +54,6 @@ function logout() {
 		$redirect = "index.php";
 	}
 	echo "<script>location.replace('$redirect');</script>";
-	//header("Location: " + $redirect);
 	exit;
 }
 ?>
